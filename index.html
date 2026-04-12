@@ -42,8 +42,8 @@ img{display:block;max-width:100%;height:auto}
 
 /* NAV */
 .topbar{position:fixed;inset:0 0 auto 0;z-index:500;height:var(--nav);display:flex;align-items:center;justify-content:space-between;padding:0 1.25rem;background:rgba(10,10,10,.88);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
-.logo{font-size:.88rem;font-weight:700;letter-spacing:-.01em;color:var(--text)}
-.logo span{color:var(--accent)}
+.logo{font-size:1.1rem;display:flex;align-items:center;justify-content:center;width:36px;height:36px;color:var(--accent);border:1px solid var(--border);border-radius:var(--r-sm);background:var(--bg3);transition:all .15s}
+.logo:hover{border-color:var(--accent);background:var(--accent-l)}
 .topnav{display:none}
 @media(min-width:960px){
   .topbar{padding:0 3.5rem}
@@ -146,11 +146,33 @@ section{position:relative;z-index:1}
 .tab.on{background:var(--text);color:#000}
 .tab i{font-size:.65rem}
 .panel{display:none}
-.panel.on{display:grid;grid-template-columns:1fr;gap:1px;border:1px solid var(--border);border-radius:var(--r);overflow:hidden;background:var(--border)}
-@media(min-width:680px){.panel.on{grid-template-columns:1fr 1fr}}
-#panel-design.on{grid-template-columns:1fr !important;background:transparent;border:none;gap:0}
-.card{background:var(--bg2);display:flex;flex-direction:column;transition:background .15s;position:relative;z-index:1}
-.card:hover{background:var(--bg3)}
+
+/* CARDS — terpisah dengan gap */
+.panel.on{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:1.5rem;
+}
+@media(min-width:680px){
+  .panel.on{
+    grid-template-columns:1fr 1fr;
+  }
+}
+
+#panel-design.on{grid-template-columns:1fr !important;gap:0}
+
+.card{
+  background:var(--bg2);
+  border:1px solid var(--border);
+  border-radius:var(--r);
+  display:flex;
+  flex-direction:column;
+  transition:background .15s, border-color .15s, transform .15s;
+  position:relative;
+  z-index:1;
+  overflow:hidden;
+}
+.card:hover{background:var(--bg3);border-color:var(--border2);transform:translateY(-3px)}
 .card-img{overflow:hidden;height:180px;position:relative;flex-shrink:0}
 .card-img img{width:100%;height:100%;object-fit:cover;transition:transform .5s ease;filter:grayscale(30%)}
 .card:hover .card-img img{transform:scale(1.05);filter:grayscale(0%)}
@@ -247,7 +269,7 @@ footer small{font-size:.68rem;color:var(--text3)}
 <body>
 
 <header class="topbar">
-  <a href="#home" class="logo">iffat<span>.</span></a>
+  <a href="#home" class="logo" aria-label="Home"><i class="fas fa-house"></i></a>
   <ul class="topnav">
     <li><a href="#about"    data-en="About"    data-id="About">About</a></li>
     <li><a href="#projects" data-en="Projects" data-id="Projects">Projects</a></li>
@@ -372,9 +394,7 @@ footer small{font-size:.68rem;color:var(--text3)}
 
     <div class="panel on" id="panel-data">
 
-      <!-- ══════════════════════════════════════════════════════════════
-           CARD 1 — DS FINAL PROJECT (Diabetes Readmission)  ← NEW
-           ══════════════════════════════════════════════════════════════ -->
+      <!-- CARD 1 — DS FINAL PROJECT (Diabetes Readmission) -->
       <div class="card card-ds-featured reveal">
         <div class="card-img">
           <img src="https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=700&q=80&auto=format&fit=crop" alt="Diabetes Readmission Prediction" loading="lazy"/>
@@ -416,9 +436,7 @@ footer small{font-size:.68rem;color:var(--text3)}
         </div>
       </div>
 
-      <!-- ══════════════════════════════════════════════════════════════
-           CARD 2 — Banking / RFM (was card 1)
-           ══════════════════════════════════════════════════════════════ -->
+      <!-- CARD 2 — Banking / RFM -->
       <div class="card reveal" style="transition-delay:.07s">
         <div class="card-img">
           <img src="https://images.unsplash.com/photo-1601597111158-2fceff292cdc?w=700&q=80&auto=format&fit=crop" alt="Banking" loading="lazy"/>
@@ -446,54 +464,6 @@ footer small{font-size:.68rem;color:var(--text3)}
                 <span data-en="View Portfolio PDF" data-id="View Portfolio PDF">View Portfolio PDF</span>
               </a>
             </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- ══════════════════════════════════════════════════════════════
-           CARD 3 — SQL Mastery
-           ══════════════════════════════════════════════════════════════ -->
-      <div class="card reveal" style="transition-delay:.14s">
-        <div class="card-img">
-          <img src="https://images.unsplash.com/photo-1544383835-bda2bc66a55d?w=700&q=80&auto=format&fit=crop" alt="SQL" loading="lazy"/>
-        </div>
-        <div class="card-body">
-          <span class="card-tag">PostgreSQL · Window Functions · CTEs</span>
-          <h3 data-en="SQL Mastery: Real-World Business Queries from Basic to Advanced"
-              data-id="SQL Mastery: Real-World Business Queries from Basic to Advanced">
-            SQL Mastery: Real-World Business Queries from Basic to Advanced
-          </h3>
-          <ul class="card-highlights">
-            <li data-en="Covers a structured progression from basic filtering and joins to more advanced topics like window functions (RANK, ROW_NUMBER, LAG/LEAD) and CTEs" data-id="Mencakup progresif terstruktur dari filtering dasar dan join hingga topik lebih lanjut seperti window function dan CTE">Covers a structured progression from basic filtering and joins to more advanced topics like window functions (RANK, ROW_NUMBER, LAG/LEAD) and CTEs</li>
-            <li data-en="Each case study is framed around a business question, with queries written for readability and clarity" data-id="Setiap studi kasus diframing di sekitar pertanyaan bisnis, dengan query yang ditulis untuk keterbacaan dan kejelasan">Each case study is framed around a business question, with queries written for readability and clarity</li>
-            <li data-en="Documented on GitHub with clear problem statements and well-commented query structure" data-id="Terdokumentasi di GitHub dengan pernyataan masalah yang jelas dan struktur query yang terkomentari dengan baik">Documented on GitHub with clear problem statements and well-commented query structure</li>
-          </ul>
-          <div class="card-links">
-            <a href="https://github.com/iffatahnaf2025/Case-Study-SQL-Basic-Advanced/blob/main/README.md" class="card-link" target="_blank"><i class="fab fa-github"></i> GitHub</a>
-          </div>
-        </div>
-      </div>
-
-      <!-- ══════════════════════════════════════════════════════════════
-           CARD 4 — Web Scraping
-           ══════════════════════════════════════════════════════════════ -->
-      <div class="card reveal" style="transition-delay:.21s">
-        <div class="card-img">
-          <img src="https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?w=700&q=80&auto=format&fit=crop" alt="Web Scraping" loading="lazy"/>
-        </div>
-        <div class="card-body">
-          <span class="card-tag">Python · BeautifulSoup · Pandas</span>
-          <h3 data-en="Job Market Intelligence: Scraping & Analyzing 500+ Data Analyst Vacancies"
-              data-id="Job Market Intelligence: Scraping & Analyzing 500+ Data Analyst Vacancies">
-            Job Market Intelligence: Scraping & Analyzing 500+ Data Analyst Vacancies
-          </h3>
-          <ul class="card-highlights">
-            <li data-en="Scraped 500+ Data Analyst job listings using BeautifulSoup and cleaned the raw data into a structured, analysis-ready dataset" data-id="Melakukan scraping 500+ lowongan Data Analyst menggunakan BeautifulSoup dan membersihkan data mentah menjadi dataset terstruktur yang siap dianalisis">Scraped 500+ Data Analyst job listings using BeautifulSoup and cleaned the raw data into a structured, analysis-ready dataset</li>
-            <li data-en="Analyzed which tools and skills appear most frequently in job postings — providing a practical snapshot of the current DA job market" data-id="Menganalisis tools dan skill yang paling sering muncul dalam lowongan kerja — memberikan gambaran praktis tentang pasar kerja DA saat ini">Analyzed which tools and skills appear most frequently in job postings — providing a practical snapshot of the current DA job market</li>
-            <li data-en="Complete end-to-end workflow: scraping → cleaning → analysis → visualization, all in a single reproducible Google Colab notebook" data-id="Alur kerja end-to-end yang lengkap: scraping → pembersihan → analisis → visualisasi, semua dalam satu Google Colab notebook yang reproducible">Complete end-to-end workflow: scraping → cleaning → analysis → visualization, all in a single reproducible Google Colab notebook</li>
-          </ul>
-          <div class="card-links">
-            <a href="https://colab.research.google.com/drive/1OXE_Di3vyMRAYNXrb6JfMYBW5Ue6s4cq?usp=sharing" class="card-link" target="_blank"><i class="fab fa-python"></i> Notebook</a>
           </div>
         </div>
       </div>
@@ -624,6 +594,7 @@ footer small{font-size:.68rem;color:var(--text3)}
 
 <footer>
   <span class="f-logo">iffat ayman ahnaf <span>·</span></span>
+
   <small data-en="© 2025 · built with curiosity & caffeine ☕" data-id="© 2025 · dibuat dengan rasa ingin tahu & kopi ☕">© 2025 · built with curiosity & caffeine ☕</small>
 </footer>
 
